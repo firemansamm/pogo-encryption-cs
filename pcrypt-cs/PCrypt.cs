@@ -120,11 +120,14 @@ namespace PCryptCS
             for (int i = 0; i < outputcontent.Count; i++)
             {
                 uint[] temp2 = new uint[0x100 / 4];
+                uint[] temp3 = new uint[0x100 / 4];
                 Buffer.BlockCopy(outputcontent[i], 0, temp2, 0, 0x100);
+                Buffer.BlockCopy(temp2, 0, temp3, 0, 0x100);
                 if (version == 1) Shuffles.Unshuffle(temp2);
                 else Shuffles.Unshuffle2(temp2);
                 Buffer.BlockCopy(temp2, 0, outputcontent[i], 0, 0x100);
                 for (int j = 0; j < 256; j++) outputcontent[i][j] ^= cipher8[j];
+                Buffer.BlockCopy(temp3, 0, cipher8, 0, 0x100);
             }
 
             byte[] ret = new byte[output_len];
