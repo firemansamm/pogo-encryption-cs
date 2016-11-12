@@ -51,7 +51,7 @@ namespace NiahashCS
             Array.Reverse(saltBytes);
             Buffer.BlockCopy(saltBytes, 0, newBuffer, 0, saltBytes.Length);
             Buffer.BlockCopy(buffer, 0, newBuffer, saltBytes.Length, buffer.Length);
-            return Hash(newBuffer);
+            return compute_hash(newBuffer);
         }
 
         public static ulong compute_hash(byte[] input)
